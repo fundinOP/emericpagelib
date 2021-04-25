@@ -42,7 +42,7 @@ class Page{
     public function getLinks(){
        return $this->links;
     }
-    public function setScrits($scripts){
+    public function setScripts($scripts){
         $this->scripts = $scripts;
     }
     public function getScripts(){
@@ -135,6 +135,7 @@ class Page{
         //debut html
         echo '<!doctype html>
                 <html lang="fr">
+                <!-- head -->
                 <head>';
         echo '<meta charset="utf-8">
               <title>'.$this->getTitle().'</title>';
@@ -147,15 +148,17 @@ class Page{
             }
         }
         //links
+        echo "<!-- css -->";
         if(!is_null($this->getLinks())){
             foreach ($this->getLinks() as $link ){
-                if(!is_null($link{'type'}) && !is_null($link{'href'}))
-                echo '<link rel="'.$link{'type'}.'" href="'.$link{'href'}.'" >';
+                if(isset($link['type']) && isset($link['href']))
+                echo '<link rel="'.$link['type'].'" href="'.$link['href'].'" >';
             }
         }
         //fin head
         echo '</head>';
         //debut body
+        echo "<!-- body -->";
         echo "<body>";
         //nav
         if(!is_null($this->getNav())){
@@ -166,6 +169,7 @@ class Page{
             }
         }
         //debut container
+        echo "<!-- container -->";
         echo '<div class="container">';
         //container
         if(!is_null($this->getContainer())){
@@ -178,6 +182,7 @@ class Page{
         //fin container
         echo '</div>';
         //footer
+        echo "<!-- Footer -->";
         if(!is_null($this->getFooter())){
             if(is_null($this->getFooterDatas())){
                 echo view($this->getFooter());
@@ -187,11 +192,12 @@ class Page{
         }
 
         //scripts
+        echo "<!-- scripts -->";
         if(!is_null($this->getScripts())){
             ;
             foreach ($this->getScripts() as $script ){
-                if(!is_null($script{'src'})){
-                    echo '<script src="'.$script{'src'}.'"></script>';
+                if(isset($script['src'])){
+                    echo '<script src="'.$script['src'].'"></script>';
                 }
 
             }
@@ -201,6 +207,7 @@ class Page{
         //fin html
         echo '</html>';
 
+        return true;
     }
 
 
