@@ -16,7 +16,7 @@ class Home extends BaseController
         $page->addContainer('/containers/index_container.html');
         $page->addFooter('/footers/base_footer.html');
         $page->setLinks([['type' => 'stylesheet', 'href' => '/css/style.css'], ['type' => 'stylesheet', 'href' => '/css/index.css']]);
-        $page->setScrits([['src' => '/scripts/main.js']]);
+        $page->setScripts([['src' => '/scripts/main.js']]);
         return $page->display();
 
 	}
