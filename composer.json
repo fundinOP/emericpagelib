@@ -3,7 +3,7 @@
 	"type": "project",
 	"description": "CodeIgniter4 starter app with the page library",
 	"license": "MIT",
-	"version": "v1.0.0",
+	"version": "6.0.0",
 	"require": {
 		"php": ">=7.2",
 		"codeigniter4/framework": "^4"
