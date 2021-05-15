@@ -34,19 +34,19 @@ class Page{
         $this->title = $title;
     }
     public function getTitle(){
-       return $this->title;
+        return $this->title;
     }
     public function setLinks($links){
         $this->links = $links;
     }
     public function getLinks(){
-       return $this->links;
+        return $this->links;
     }
     public function setScripts($scripts){
         $this->scripts = $scripts;
     }
     public function getScripts(){
-       return $this->scripts;
+        return $this->scripts;
     }
     private function setContainer($container){
         $this->container = $container;
@@ -132,6 +132,8 @@ class Page{
     }
 
     public function display(){
+        $parser = \Config\Services::parser();
+
         //debut html
         echo '<!doctype html>
                 <html lang="fr">
@@ -144,7 +146,7 @@ class Page{
             if(is_null($this->getHeaderDatas())){
                 echo view($this->getHeader());
             }else{
-                echo view($this->getHeader(), $this->getHeaderDatas());
+                echo $parser->setData($this->getHeaderDatas())->render($this->getHeader());
             }
         }
         //links
@@ -152,7 +154,7 @@ class Page{
         if(!is_null($this->getLinks())){
             foreach ($this->getLinks() as $link ){
                 if(isset($link['type']) && isset($link['href']))
-                echo '<link rel="'.$link['type'].'" href="'.$link['href'].'" >';
+                    echo '<link rel="'.$link['type'].'" href="'.$link['href'].'" >';
             }
         }
         //fin head
@@ -165,7 +167,7 @@ class Page{
             if(is_null($this->getNavDatas())){
                 echo view($this->getNav());
             }else{
-                echo view($this->getNav(), $this->getNavDatas());
+                echo $parser->setData($this->getNavDatas())->render($this->getNav());
             }
         }
         //debut container
@@ -176,7 +178,7 @@ class Page{
             if(is_null($this->getContainerDatas())){
                 echo view($this->getContainer());
             }else{
-                echo view($this->getContainer(), $this->getContainerDatas());
+                echo $parser->setData($this->getContainerDatas())->render($this->getContainer());
             }
         }
         //fin container
@@ -187,7 +189,7 @@ class Page{
             if(is_null($this->getFooterDatas())){
                 echo view($this->getFooter());
             }else{
-                echo view($this->getFooter(), $this->getFooterDatas());
+                echo $parser->setData($this->getFooterDatas())->render($this->getFooter());
             }
         }
 
